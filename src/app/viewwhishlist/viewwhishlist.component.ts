@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MyserviceService, Product } from '../myservice.service';
+import { MyserviceService, Product, Whishlist } from '../myservice.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,14 +9,17 @@ import { Router } from '@angular/router';
 })
 export class ViewwhishlistComponent implements OnInit {
   message: string;
-  whishlist: Product[];
+  whishlist: Whishlist[];
+  userId:any;
   constructor(private myservice: MyserviceService, private router: Router) { }
 
   ngOnInit(): any {
-    this.myservice.getWhishlist().subscribe(response => this.handleSuccessfulResponse(response),
+    this.userId=123;
+    console.log(this.userId);
+    this.myservice.getWhishlist(this.userId).subscribe(response => this.handleSuccessfulResponse(response),
     );
   }
-  handleSuccessfulResponse(response: Product[]): any {
+  handleSuccessfulResponse(response: Whishlist[]): any {
     this.whishlist = response;
   }
 

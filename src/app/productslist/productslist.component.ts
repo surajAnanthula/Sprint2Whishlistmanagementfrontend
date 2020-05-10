@@ -10,8 +10,6 @@ import { Router } from '@angular/router';
 export class ProductslistComponent implements OnInit {
   message: string;
   products: Product[];
-  wproducts: Product[];
-
   constructor(private myservice: MyserviceService, private router: Router) {
   }
   ngOnInit(): any {
@@ -23,19 +21,15 @@ export class ProductslistComponent implements OnInit {
     this.products =response;
   }
   
-  add(p) {
-    console.log(p)
-    this.wproducts=[{
-      productId:p.productId,
-      productCatogery:p.productCatogery,
-      productName:p.productName
-    }];
-    console.log(this.wproducts)
-    this.myservice.add(this.wproducts).subscribe((result)=>{
-      if(result!=null)
-        alert("Added successfully");
+  add(p:Product[]) {
+    
+    
+    this.myservice.add(p).subscribe(backendData =>{
+      console.log(backendData);
+      if(backendData!=null)
+        alert("Added successfully")
       else
-        alert("add failed");
+        alert("add failed")
     });
   }
 
